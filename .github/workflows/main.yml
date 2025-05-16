@@ -37,10 +37,7 @@ jobs:
 
       - name: Run Robot Framework tests
         run: |
-          pytest Demo-Bao.robot \
-            --robotframework-output=output.xml \
-            --robotframework-log=log.html \
-            --robotframework-report=report.html
+          pytest Demo-Bao.robot 
 
       - name: Upload Robot Logs
         uses: actions/upload-artifact@v4
