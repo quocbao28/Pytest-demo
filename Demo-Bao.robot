@@ -27,7 +27,7 @@ Open Browser To Guru Site
 
 Fake Email
     ${email}=    FakerLibrary.Email
-    [Return]    ${email}
+    RETURN    ${email}
 
 Input Email And Get Credentials
     [Arguments]    ${email}
