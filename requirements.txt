@@ -1,0 +1,15 @@
+# Core Python test libraries
+pytest
+selenium
+faker
+
+# Optional: for WebDriver auto-management
+webdriver-manager
+
+# Robot Framework support
+robotframework
+robotframework-seleniumlibrary
+robotframework-faker
+
+# Pytest plugin to run .robot tests
+pytest-robotframework
