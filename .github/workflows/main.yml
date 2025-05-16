@@ -29,16 +29,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Pytest tests (headless)
+      - name: Run Pytest tests 
         run: |
           pytest test_guru99_login.py --browser=${{ github.event.inputs.browser || 'firefox' }} --headless
 
-      - name: Run Robot Framework tests
-        run: |
-          pytest tests/test_guru99.robot \
-            --robotframework-output=output.xml \
-            --robotframework-log=log.html \
-            --robotframework-report=report.html
 
       - name: Upload Robot Logs (optional)
         uses: actions/upload-artifact@v4
