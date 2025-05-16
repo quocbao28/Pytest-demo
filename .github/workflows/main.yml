@@ -1,0 +1,52 @@
+name: Run Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        browser: [firefox]  # You can add 'chrome' if you wish
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Pytest tests (headless)
+        run: |
+          pytest tests/test_login.py --browser=${{ matrix.browser }} --headless
+
+      - name: Run Robot Framework tests
+        run: |
+          pytest tests/test_guru99.robot --robotframework-output=output.xml --robotframework-log=log.html --robotframework-report=report.html
+
+      - name: Upload Robot Logs (optional)
+        uses: actions/upload-artifact@v4
+        with:
+          name: robot-logs
+          path: |
+            output.xml
+            log.html
+            report.html
+
+      - name: Upload Screenshots on Failure (optional)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: failure-screenshots
+          path: |
+            screenshots/
